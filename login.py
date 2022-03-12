@@ -39,16 +39,20 @@ ec2_box.grid(row=4,column=1)
 
 def submitpass():
     if NAME_box.get().strip() in df["name"].values:
-        passshow=Label(frame,text=" USER SIGNED IN ",background="#232754",fg='white', font=('arial', 9))
-        passshow.grid(row=6,column=0,columnspan=2,padx=8)
-        mainwin()
+        if int(pass_box.get().strip())==int(df[df["name"] == NAME_box.get().strip()]["pass"].values[0]):
+            passshow=Label(frame,text="      USER SIGNED IN      ",background="#232754",fg='white', font=('arial', 9))
+            passshow.grid(row=6,column=0,columnspan=2,padx=8)
+            mainwin(NAME_box.get().strip())
+        else:
+            passshow=Label(frame,text=" INCORRECT PASSWORD ",background="#232754",fg='white', font=('arial', 9))
+            passshow.grid(row=6,column=0,columnspan=2,padx=8)
     else:
         nd=pd.DataFrame([[NAME_box.get(),pass_box.get(),ec1_box.get(),ec2_box.get()]],columns=['name','pass','ec1','ec2'])
         nd.to_csv('data.csv', mode='a', index=False, header=False)
-        passshow=Label(frame,text=" USER SIGNED IN ",background="#232754",fg='white', font=('arial', 9))
+        passshow=Label(frame,text=" USER SIGNED UP ",background="#232754",fg='white', font=('arial', 9))
         passshow.grid(row=6,column=0,columnspan=2,padx=8)
-        mainwin()
-checkbtn=Button(frame,text="SIGN IN",command=submitpass)
+        mainwin(NAME_box.get().strip())
+checkbtn=Button(frame,text="SIGN IN/UP",command=submitpass)
 checkbtn.grid(row=5,column=1,columnspan=2,padx=10,pady=5,ipadx=45)
 
 root.mainloop()
