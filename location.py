@@ -7,7 +7,6 @@ from maps import map
 def locshow():
     map()
     app = QApplication(sys.argv)
-
     web = QWebEngineView()
     web.load(QUrl("C:/Users/dr_de/OneDrive/Documents/VS/map.html"))
     web.show()
