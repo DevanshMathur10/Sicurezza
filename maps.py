@@ -1,5 +1,7 @@
 import gmplot
+coords=(26.936549, 75.789425,18)
 def map():
+    
     gmap=gmplot.GoogleMapPlotter(26.936549, 75.789425,18)
     gmap.marker(26.936549, 75.789425, color='cornflowerblue')
 
@@ -26,4 +28,3 @@ def map():
     gmap.polygon(*safearea, color='green', edge_width=5)
 
     gmap.draw('map.html')
-
